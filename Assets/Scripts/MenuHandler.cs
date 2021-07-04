@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement; 
 
 #if UNITY_EDITOR
@@ -11,7 +12,7 @@ public class MenuHandler : MonoBehaviour
     {   
         MainManager.Instance.level = 1;
         MainManager.Instance.experience = 0;
-        MainManager.Instance.name = null;
+        MainManager.Instance.name = "";
         MainManager.Instance.playerPosition = Vector3.zero;
         SceneManager.LoadScene(1);
     }
@@ -32,6 +33,12 @@ public class MenuHandler : MonoBehaviour
         MainManager.Instance.name = UIManager.Instance.nameText.text;
         MainManager.Instance.playerPosition = FindObjectOfType<Player>().transform.position;
         MainManager.Instance.SaveData();
+    }
+
+    public void SubmitName(Text name)
+    {   
+        UIManager.Instance.insertNamePanel.SetActive(false);
+        UIManager.Instance.SetName(name.text);
     }
 
     public void Quit()

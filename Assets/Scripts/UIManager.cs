@@ -7,7 +7,7 @@ public class UIManager : MonoBehaviour
     public static UIManager Instance {get; private set; }
 
     [SerializeField] Slider expBar; 
-    [SerializeField] public TextMeshProUGUI nameText;
+    [SerializeField] public Text nameText;
     [SerializeField] public GameObject insertNamePanel;
     [SerializeField] TextMeshProUGUI levelText;
     [SerializeField] ParticleSystem levelUpParticles;
@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     private void Start() 
     {
         if(!MainManager.Instance.name.Equals(""))
-            nameText.text = MainManager.Instance.name;
+            SetName(MainManager.Instance.name);
         else
             insertNamePanel.SetActive(true);
 
@@ -61,4 +61,8 @@ public class UIManager : MonoBehaviour
             }
         } 
     } 
+
+    public void SetName(string name)
+    {   nameText.text = name;
+    }
 }
