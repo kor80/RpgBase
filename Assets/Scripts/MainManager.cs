@@ -8,7 +8,7 @@ public class MainManager : MonoBehaviour
     public int level;
     public float experience;
     public string name;
-    private Vector3 playerPosition;
+    public Vector3 playerPosition;
 
     private void Awake() 
     {
@@ -40,12 +40,14 @@ public class MainManager : MonoBehaviour
         data.position = playerPosition;
 
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(Application.persistentDataPath + "savedata.json", json);
+        File.WriteAllText(Application.persistentDataPath + "/savedata.json", json);
+        Debug.Log(Application.persistentDataPath + "/savedata.json");
+        Debug.Log("The data was saved successfully");
     }
 
     public void LoadData()
     {
-        string path = Application.persistentDataPath + "savedata.json";
+        string path = Application.persistentDataPath + "/savedata.json";
         if(File.Exists(path))
         {
             string json = File.ReadAllText(path);
@@ -56,6 +58,8 @@ public class MainManager : MonoBehaviour
             name = data.name;
             playerPosition = data.position;
         }
+        else
+            Debug.Log("Cannot found the file");
     }
 
 }
